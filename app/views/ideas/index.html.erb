@@ -18,7 +18,10 @@
         <%= link_to 'Show', idea_path(idea) %>
       </td>
       <td>
-        <%= link_to 'Edit', edit_idea_path(idea) %>
+        <%= link_to 'Edit', idea_path(idea), method: :delete, data: {confirm: 'Are you sure?' } %>
+      </td>
+      <td>
+        <%= link_to 'Destroy', edit_idea_path(idea) %>
       </td>
     </tr>
   <% end %>

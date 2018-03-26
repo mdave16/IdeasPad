@@ -7,6 +7,10 @@ class IdeasController < ApplicationController
     @idea = Idea.new
   end
 
+  def edit
+    @idea = Idea.find(params[:id])
+  end
+
   def show
     @idea = Idea.find(params[:id])
   end
@@ -29,6 +33,13 @@ class IdeasController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @idea = Idea.find(params[:id])
+    @idea.destroy
+
+    redirect_to ideas_path
   end
 
   private
