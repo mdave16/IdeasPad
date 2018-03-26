@@ -13,10 +13,21 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params)
+
     if @idea.save
       redirect_to @idea
     else
       render 'new'
+    end
+  end
+
+  def update
+    @idea = Idea.find(params[:id])
+
+    if @idea.update(idea_params)
+      redirect_to @idea
+    else
+      render 'edit'
     end
   end
 
