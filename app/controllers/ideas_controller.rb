@@ -1,8 +1,10 @@
 class IdeasController < ApplicationController
   def index
     @ideas = Idea.all
-  end 
+  end
+
   def new
+    @idea = Idea.new
   end
 
   def show
@@ -11,8 +13,11 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params)
-    @idea.save
-    redirect_to @idea
+    if @idea.save
+      redirect_to @idea
+    else
+      render 'new'
+    end
   end
 
   private
