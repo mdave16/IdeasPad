@@ -6,18 +6,18 @@ IdeasPad is a small blogging application focusing on ideas for programmers to wo
 
 ## Local Development
 
-Only `docker` and `docker-compose` are required. 
+Only `docker` and `docker-compose` are required.
 To develop, first build the image:
 
 `docker-compose build web`
 
-## Database creation
+### Database creation
 
-After having built the image, we need to create the database before running. 
+After having built the image, we need to create the database before running.
 
 `docker-compose run --rm web rails db:create db:migrate`
 
-## Run the server
+### Run the server
 
 `docker-compose up web`
 
@@ -25,6 +25,20 @@ After having built the image, we need to create the database before running.
 
 `docker-compose run --rm web rails test`
 
-## How to deploy 
+### Running Pry
+
+You may want to debug your code at some point, simply put
+
+```
+web:
+  tty: true
+  stdin_open: true
+```
+
+in your `docker-compose.yaml` and then
+`docker attach ideaspad_web_1`.
+Now you need only to put `binding.pry` in order to pry on the project.
+
+## How to deploy
 
 Basically, you don't. Everything should automagically work from the CI. The only time a change needs to be made is when changing the database structure, we have to run migrations manually on Heroku CLI.
