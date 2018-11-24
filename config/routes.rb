@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'sessions#new'
 
-  post "/auth/:provider/callback", to: "sessions#create"
-  post 'auth/failure', to: redirect('/')
+  get "/auth/:provider/callback", to: "sessions#create"
+  get 'auth/failure', to: redirect('/')
 
   delete 'signout', to: 'sessions#destroy', as: 'signout'
 

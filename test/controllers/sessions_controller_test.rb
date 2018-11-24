@@ -19,8 +19,8 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
 
 
-    test "#create should successfully create a user" do
-    post '/auth/github/callback'
+  test "#create should successfully create a user" do
+    get '/auth/github/callback'
 
     test_user = User.find(session[:user_id])
 
@@ -28,30 +28,30 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'test_user', test_user.username
     assert_equal 'www.picture.url/1', test_user.avatar_url
     assert_equal 'github', test_user.provider
-    assert_equal 'very_long_token_here', test_user.oauth_token
-    end
+		assert_equal 'very_long_token_here', test_user.oauth_token
+  end
 
-    test "#create should successfully create a session" do
-      post '/auth/github/callback'
-      assert_not_nil session[:user_id]
-    end
+  test "#create should successfully create a session" do
+    get '/auth/github/callback'
+    assert_not_nil session[:user_id]
+  end
 
-    test "#create should redirect the user to the root url" do
-      post '/auth/github/callback'
-      assert_redirected_to root_url
-    end
+  test "#create should redirect the user to the root url" do
+    get '/auth/github/callback'
+    assert_redirected_to root_url
+  end
 
-    test "#delete should clear the session" do
-      post '/auth/github/callback'
-      assert_not_nil session[:user_id]
-      delete '/signout'
-      assert_nil session[:user_id]
-    end
+  test "#delete should clear the session" do
+    get '/auth/github/callback'
+    assert_not_nil session[:user_id]
+    delete '/signout'
+    assert_nil session[:user_id]
+  end
 
-    test "#delete should redirect to the home page" do
-      post '/auth/github/callback'
-      delete '/signout'
-      assert_redirected_to root_url
-    end
+  test "#delete should redirect to the home page" do
+    get '/auth/github/callback'
+    delete '/signout'
+    assert_redirected_to root_url
+  end
 
 end
