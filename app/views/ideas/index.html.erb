@@ -18,11 +18,15 @@
 				<td><%= idea.get_upvotes.size - idea.get_downvotes.size %></td>
         <td><%= idea.title %></td>
 				<td><%= idea.desc %></td>
+				<% if !current_user.blank? %>
 				<td><%= link_to 'Upvote', like_idea_path(idea), method: :put %></td>
 				<td><%= link_to 'Downvote', dislike_idea_path(idea), method: :put %></td>
+				<% end %>
         <td><%= link_to 'Show', idea %></td>
+				<% if !current_user.blank? %>
         <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
         <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<% end %>
       </tr>
     <% end %>
   </tbody>
