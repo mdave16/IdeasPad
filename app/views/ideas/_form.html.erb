@@ -21,6 +21,16 @@
     <%= form.text_area :desc, id: :idea_desc %>
   </div>
 
+  <div class="field">
+    <%= form.label :tags, "Tags"%>
+    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name%>
+  </div>
+
+  <%= form.fields_for :tags, idea.tags.build do |tag_fields| %>
+	  <%= tag_fields %>
+    <%= tag_fields.text_field :title %>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
