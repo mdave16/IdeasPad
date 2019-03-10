@@ -8,6 +8,7 @@
 			<th>Votes</th>
       <th>Title</th>
       <th>Description</th>
+			<th>Tags</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
 				<td><%= idea.get_upvotes.size - idea.get_downvotes.size %></td>
         <td><%= idea.title %></td>
 				<td><%= idea.desc %></td>
+				<td><%= idea.tags.map {|t| t.name } %></td>
 				<% if !current_user.blank? %>
 				<td><%= link_to 'Upvote', like_idea_path(idea), method: :put %></td>
 				<td><%= link_to 'Downvote', dislike_idea_path(idea), method: :put %></td>

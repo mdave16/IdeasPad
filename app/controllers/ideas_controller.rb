@@ -15,10 +15,12 @@ class IdeasController < ApplicationController
   # GET /ideas/new
   def new
     @idea = Idea.new
+		@tags = Tag.all
   end
 
   # GET /ideas/1/edit
   def edit
+		@tags = Tag.all
   end
 
   # POST /ideas
