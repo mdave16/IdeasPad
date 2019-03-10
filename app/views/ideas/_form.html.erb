@@ -1,10 +1,10 @@
-<%= form_with(model: idea, local: true) do |form| %>
-  <% if idea.errors.any? %>
+<%= form_with(model: @idea, local: true) do |form| %>
+  <% if @idea.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+      <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
 
       <ul>
-      <% idea.errors.full_messages.each do |message| %>
+      <% @idea.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -20,6 +20,13 @@
     <%= form.label :desc, "Description"%>
     <%= form.text_area :desc, id: :idea_desc %>
   </div>
+
+	<% @tags.each do |t| %>
+		<%= form.label :tag_ids, t.name %>
+	 	<%= check_box("idea", "tag_ids", {:multiple => true}, t.id, nil) %>
+	<% end %>
+
+	<%= link_to "Create another tag", new_tag_path %>
 
   <div class="actions">
     <%= form.submit %>
