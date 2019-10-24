@@ -1,0 +1,18 @@
+version: v1.0
+name: First pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Unit tests
+    task:
+      prologue:
+        commands:
+          - checkout
+          - docker-compose build web
+          - 'docker-compose run --rm web rails db:create db:migrate'
+      jobs:
+        - name: Unit tests
+          commands:
+            - docker-compose run --rm web rails test
